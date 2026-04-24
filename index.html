@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TWW AVANGARD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-image: url('fond1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; min-height: 100vh; font-family: 'Indie Flower', cursive; padding: 20px 20px 100px 20px; }
+    .logo-wrap { text-align: center; margin-bottom: 24px; }
+    .logo-wrap img { max-height: 200px; }
+    .BOX { width: 90%; max-width: 1100px; margin: 0 auto; background-color: #fff; border: 5px solid rgb(126,57,10); border-radius: 14px; display: flex; overflow: hidden; }
+    .col { flex: 1; padding: 24px 28px 32px 28px; display: flex; flex-direction: column; }
+    .col + .col { border-left: 3px solid rgb(126,57,10); }
+    .col-title { font-size: 30px; color: #3b1a05; margin-bottom: 18px; letter-spacing: 1px; }
+    .outils-grid { display: flex; flex-direction: column; gap: 12px; }
+    .outil-btn { display: flex; align-items: center; gap: 14px; background-color: #f5ede3; border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 10px 16px; text-decoration: none; color: #3b1a05; font-family: 'Indie Flower', cursive; font-size: 20px; transition: background-color 0.2s, transform 0.15s, color 0.2s; }
+    .outil-btn:hover { background-color: rgb(126,57,10); color: #fff; transform: scale(1.03); }
+    .outil-icon { font-size: 30px; flex-shrink: 0; width: 38px; text-align: center; }
+    .outil-desc { font-size: 13px; opacity: 0.65; display: block; line-height: 1.2; }
+    .section-divider { font-size: 24px; color: #3b1a05; margin: 22px 0 12px 0; letter-spacing: 1px; border-top: 3px solid rgb(126,57,10); padding-top: 16px; }
+    .actu-grid { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .actu-grid .actu-card:last-child { flex: 1; }
+    .actu-card { background-color: #f5ede3; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 10px 14px; transition: background-color 0.2s, transform 0.15s; }
+    .actu-card:hover { background-color: #eddcc8; transform: scale(1.01); }
+    .actu-header { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+    .actu-icon { font-size: 22px; flex-shrink: 0; }
+    .actu-card-title { font-size: 18px; color: #3b1a05; }
+    .actu-date { margin-left: auto; font-size: 12px; color: rgb(126,57,10); opacity: 0.7; white-space: nowrap; }
+    .actu-text { font-size: 16px; color: #5a3010; line-height: 1.6; opacity: 0.9; }
+    .actu-tag { display: inline-block; font-size: 14px; padding: 3px 10px; border-radius: 99px; margin-top: 6px; }
+    .tag-war     { background: #fddede; color: #a03030; border: 1px solid #f0a0a0; }
+    .tag-announce{ background: #def0dd; color: #2a7a2a; border: 1px solid #90d090; }
+    .tag-event   { background: #dde8fd; color: #2a4aaa; border: 1px solid #90aaee; }
+    .classement-list { display: flex; flex-direction: column; gap: 8px; }
+    .classement-row { display: flex; align-items: center; gap: 12px; background-color: #f5ede3; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 8px 14px; transition: background-color 0.2s, transform 0.15s; }
+    .classement-row:hover { background-color: #eddcc8; transform: scale(1.02); }
+    .classement-rank { font-size: 22px; font-weight: bold; color: rgb(126,57,10); min-width: 30px; text-align: center; }
+    .rank-1 .classement-rank { color: #c9a000; font-size: 22px; }
+    .rank-2 .classement-rank { color: #888; font-size: 22px; }
+    .rank-3 .classement-rank { color: #a0522d; font-size: 22px; }
+    .classement-logo { width: 36px; height: 36px; border-radius: 6px; border: 2px solid rgb(126,57,10); background-color: #ddd; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; overflow: hidden; }
+    .classement-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .classement-name { flex: 1; font-size: 20px; color: #3b1a05; }
+    .classement-points { font-size: 18px; color: rgb(126,57,10); font-weight: bold; white-space: nowrap; }
+    .points-legend { margin-top: 14px; background-color: #f5ede3; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 10px 14px; font-size: 17px; color: #3b1a05; line-height: 1.8; }
+    .pts-win  { display: inline-block; padding: 1px 10px; border-radius: 99px; font-size: 14px; margin-right: 6px; background: #def0dd; color: #2a7a2a; border: 1px solid #90d090; }
+    .pts-loss { display: inline-block; padding: 1px 10px; border-radius: 99px; font-size: 14px; margin-right: 6px; background: #fddede; color: #a03030; border: 1px solid #f0a0a0; }
+    .upcoming-list { display: flex; flex-direction: column; gap: 8px; }
+    .upcoming-card { display: flex; align-items: center; gap: 12px; background: #fff8f0; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 8px 14px; transition: transform 0.15s; }
+    .upcoming-card:hover { transform: scale(1.01); }
+    .upcoming-date { font-size: 15px; color: #fff; background: rgb(126,57,10); border-radius: 6px; padding: 4px 10px; white-space: nowrap; flex-shrink: 0; }
+    .upcoming-teams { flex: 1; font-size: 18px; color: #3b1a05; text-align: center; }
+    .upcoming-vs { color: rgb(126,57,10); font-weight: bold; margin: 0 6px; }
+    .upcoming-ligue { font-size: 15px; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+    .ligue-or-badge     { background: #fff8d0; color: #8a6500; border: 1px solid #e0c040; }
+    .ligue-argent-badge { background: #f0f0f0; color: #606060; border: 1px solid #b0b0b0; }
+    footer { position: fixed; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(40,15,0,0.7), transparent); display: flex; justify-content: center; align-items: center; gap: 12px; padding: 14px 0; z-index: 100; }
+    .footers { font-family: 'Indie Flower', cursive; font-size: 26px; background-color: #fff; border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 4px 10px; }
+    .youtube { background-color: #fff; border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 3px 5px 0 5px; display: flex; align-items: center; }
+    .youtube img { width: 44px; height: 44px; }
+  </style>
+</head>
+<body>
+  <div class="logo-wrap"><img src="fav.ico" alt="TWW Avangard"></div>
+  <div class="BOX">
+    <!-- LEFT: TOOLS + NEWS -->
+    <div class="col">
+      <div class="col-title">TOOLS</div>
+      <div class="outils-grid">
+        <a href="valuelist.html" class="outil-btn">
+          <span class="outil-icon">📋</span>
+          <span>Value List<span class="outil-desc">Item values in the game</span></span>
+        </a>
+        <a href="wars.html" class="outil-btn">
+          <span class="outil-icon">⚔️</span>
+          <span>Wars<span class="outil-desc">Battles & faction rankings</span></span>
+        </a>
+        <a href="https://discord.gg/" class="outil-btn">
+          <span class="outil-icon">💬</span>
+          <span>Discord<span class="outil-desc">Join the community</span></span>
+        </a>
+      </div>
+
+      <div class="section-divider">NEWS</div>
+      <div class="actu-grid">
+        <div class="actu-card">
+          <div class="actu-header"><span class="actu-icon">⚔️</span><span class="actu-card-title">SOON</span><span class="actu-date">04/21/2026</span></div>
+          <div class="actu-text">SOON</div>
+          <span class="actu-tag tag-war">War</span>
+        </div>
+        <div class="actu-card">
+          <div class="actu-header"><span class="actu-icon">📣</span><span class="actu-card-title">SOON</span><span class="actu-date">04/19/2026</span></div>
+          <div class="actu-text">SOON</div>
+          <span class="actu-tag tag-announce">Announcement</span>
+        </div>
+        <div class="actu-card">
+          <div class="actu-header"><span class="actu-icon">🏆</span><span class="actu-card-title">SOON</span><span class="actu-date">04/17/2026</span></div>
+          <div class="actu-text">SOON</div>
+          <span class="actu-tag tag-event">Event</span>
+        </div>
+        <div class="actu-card">
+          <div class="actu-header"><span class="actu-icon">🛡️</span><span class="actu-card-title">SOON</span><span class="actu-date">04/14/2026</span></div>
+          <div class="actu-text">SOON</div>
+          <span class="actu-tag tag-announce">Announcement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ALL TIME RANKING + UPCOMING BATTLES -->
+    <div class="col">
+      <div class="col-title">🏆 ALL TIME RANKING</div>
+      <div class="classement-list">
+        <div class="classement-row rank-1"><span class="classement-rank">🥇</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row rank-2"><span class="classement-rank">🥈</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row rank-3"><span class="classement-rank">🥉</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">4</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">5</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">6</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">7</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">8</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">9</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+        <div class="classement-row"><span class="classement-rank">10</span><div class="classement-logo">x</div><span class="classement-name">NO NAME</span><span class="classement-points">0 pts</span></div>
+      </div>
+      <div class="points-legend">
+        📊 System: <span class="pts-win">✔ Win</span> = <strong>+1 pt</strong> &nbsp;|&nbsp; <span class="pts-loss">✘ Loss</span> = <strong>0 pt</strong>
+      </div>
+      <div class="section-divider">📅 UPCOMING BATTLES</div>
+      <div class="upcoming-list">
+        <div class="upcoming-card">
+          <span class="upcoming-date">04/24/2026</span>
+          <div class="upcoming-teams">Nothing <span class="upcoming-vs">VS</span> Nothing</div>
+          <span class="upcoming-ligue ligue-or-badge">🥇 Gold League</span>
+        </div>
+        <div class="upcoming-card">
+          <span class="upcoming-date">04/26/2026</span>
+          <div class="upcoming-teams">Nothing <span class="upcoming-vs">VS</span> Nothing</div>
+          <span class="upcoming-ligue ligue-argent-badge">🥈 Silver League</span>
+        </div>
+        <div class="upcoming-card">
+          <span class="upcoming-date">04/30/2026</span>
+          <div class="upcoming-teams">Nothing <span class="upcoming-vs">VS</span> Nothing</div>
+          <span class="upcoming-ligue ligue-or-badge">🥇 Gold League</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footers">By Jocker_ty</div>
+    <div class="youtube"><a href="https://www.youtube.com/@Jocker_ty"><img src="youtube.png" alt="YouTube"></a></div>
+  </footer>
+</body>
+</html>

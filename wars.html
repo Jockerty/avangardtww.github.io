@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Wars – TWW Avangard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-image: url('fond1.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; min-height: 100vh; font-family: 'Indie Flower', cursive; padding: 20px 20px 100px 20px; }
+    .logo-wrap { text-align: center; margin-bottom: 16px; }
+    .logo-wrap img { max-height: 140px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Indie Flower', cursive; font-size: 20px; color: #fff; background: rgba(60,20,0,0.7); border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 6px 18px; text-decoration: none; margin-bottom: 16px; transition: background 0.2s, transform 0.15s; }
+    .back-btn:hover { background: rgb(126,57,10); transform: scale(1.05); }
+    .page-title { text-align: center; font-size: 38px; color: #fff; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 26px; letter-spacing: 2px; }
+    .wars-layout { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .wars-layout .full-width { grid-column: 1 / -1; }
+    .section-box { background: #fff; border: 3px solid rgb(126,57,10); border-radius: 14px; overflow: hidden; }
+    .section-header { background: rgb(126,57,10); color: #fff; font-size: 22px; padding: 10px 18px; letter-spacing: 1px; }
+    .section-body { padding: 16px 18px; }
+    .match-list { display: flex; flex-direction: column; gap: 10px; }
+    .match-card { background: #f5ede3; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; transition: transform 0.15s; }
+    .match-card:hover { transform: scale(1.01); }
+    .match-date { font-size: 15px; color: #9a7050; min-width: 90px; }
+    .match-teams { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 20px; color: #3b1a05; }
+    .team-name { min-width: 120px; text-align: center; }
+    .match-result { font-size: 23px; font-weight: bold; background: #fff; border: 2px solid rgb(180,100,30); border-radius: 8px; padding: 4px 16px; min-width: 80px; text-align: center; }
+    .res-v { color: #2a7a2a; }
+    .res-d { color: #a03030; }
+    .match-badge { font-size: 14px; padding: 4px 12px; border-radius: 99px; white-space: nowrap; }
+    .badge-gold   { background: #fff8d0; color: #8a6500; border: 1px solid #e0c040; }
+    .badge-silver { background: #f0f0f0; color: #606060; border: 1px solid #b0b0b0; }
+    .ligues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .ligue-box { border-radius: 10px; overflow: hidden; border: 2px solid; }
+    .ligue-gold   { border-color: #c9a000; }
+    .ligue-silver { border-color: #909090; }
+    .ligue-header { padding: 8px 14px; font-size: 20px; color: #fff; text-align: center; }
+    .ligue-gold   .ligue-header { background: linear-gradient(135deg, #c9a000, #e8c840); }
+    .ligue-silver .ligue-header { background: linear-gradient(135deg, #808080, #b0b0b0); }
+    .ligue-rows { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; background: #f5ede3; }
+    .ligue-row { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 8px; border: 1px solid rgb(200,140,80); padding: 8px 12px; font-size: 18px; color: #3b1a05; }
+    .ligue-row-rank { font-weight: bold; color: rgb(126,57,10); min-width: 22px; }
+    .ligue-row-name { flex: 1; }
+    .ligue-row-pts { font-size: 14px; color: #9a6030; }
+    .recruit-body { display: flex; flex-direction: column; gap: 12px; }
+    .recruit-text { font-size: 19px; color: #3b1a05; line-height: 1.7; }
+    .recruit-btn { display: inline-flex; align-items: center; gap: 10px; background: #5865F2; color: #fff; border: 3px solid #3b4ec0; border-radius: 10px; padding: 8px 20px; font-family: 'Indie Flower', cursive; font-size: 20px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .recruit-btn:hover { background: #3b4ec0; transform: scale(1.04); }
+    .rewards-grid { display: flex; flex-direction: column; gap: 10px; }
+    .reward-card { display: flex; align-items: center; gap: 14px; background: #f5ede3; border: 2px solid rgb(180,100,30); border-radius: 10px; padding: 12px 16px; transition: transform 0.15s; }
+    .reward-card:hover { transform: scale(1.01); }
+    .reward-icon { font-size: 36px; flex-shrink: 0; }
+    .reward-info { flex: 1; }
+    .reward-title { font-size: 22px; color: #3b1a05; }
+    .reward-desc  { font-size: 16px; color: #9a6030; line-height: 1.4; margin-top: 3px; }
+    .reward-value { font-size: 20px; font-weight: bold; color: rgb(126,57,10); white-space: nowrap; background: #fff; border: 2px solid rgb(180,100,30); border-radius: 8px; padding: 5px 14px; }
+    .stats-table-wrap { overflow-x: auto; margin-top: 6px; }
+    .stats-table { width: 100%; border-collapse: collapse; font-family: 'Indie Flower', cursive; font-size: 17px; }
+    .stats-table thead tr { background: rgb(126,57,10); color: #fff; }
+    .stats-table thead th { padding: 11px 14px; text-align: center; white-space: nowrap; font-weight: normal; letter-spacing: 0.5px; }
+    .stats-table thead th:first-child { text-align: left; }
+    .stats-table tbody tr { border-bottom: 1px solid rgb(220,160,80); transition: background 0.15s; }
+    .stats-table tbody tr:nth-child(even) { background: #fdf5ec; }
+    .stats-table tbody tr:nth-child(odd)  { background: #fff; }
+    .stats-table tbody tr:hover { background: #eddcc8; }
+    .stats-table td { padding: 10px 14px; text-align: center; color: #3b1a05; white-space: nowrap; }
+    .stats-table td:first-child { text-align: left; font-size: 16px; }
+    .td-v  { color: #2a7a2a; font-weight: bold; }
+    .td-d  { color: #a03030; font-weight: bold; }
+    .td-gold   { color: #8a6500; background: #fff8d0; border-radius: 6px; padding: 2px 8px; display: inline-block; }
+    .td-silver { color: #505050; background: #f0f0f0; border-radius: 6px; padding: 2px 8px; display: inline-block; }
+    footer { position: fixed; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(40,15,0,0.7), transparent); display: flex; justify-content: center; align-items: center; gap: 12px; padding: 14px 0; z-index: 100; }
+    .footers { font-family: 'Indie Flower', cursive; font-size: 26px; background-color: #fff; border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 4px 10px; }
+    .youtube { background-color: #fff; border: 3px solid rgb(126,57,10); border-radius: 10px; padding: 3px 5px 0 5px; display: flex; align-items: center; }
+    .youtube img { width: 44px; height: 44px; }
+  </style>
+</head>
+<body>
+  <div class="logo-wrap"><img src="fav.ico" alt="TWW Avangard"></div>
+  <div style="max-width:1100px;margin:0 auto 4px auto;">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+  <div class="page-title">⚔️ WARS</div>
+
+  <div class="wars-layout">
+
+    <!-- MATCH HISTORY -->
+    <div class="section-box full-width">
+      <div class="section-header">📜 Battle History</div>
+      <div class="section-body">
+        <div class="match-list">
+          <div class="match-card">
+            <span class="match-date">04/21/2026</span>
+            <div class="match-teams"><span class="team-name">NOTHING</span><span class="match-result"><span class="res-v">x</span> – <span class="res-d">x</span></span><span class="team-name">NOTHING</span></div>
+            <span class="match-badge badge-gold">🥇 Gold League</span>
+          </div>
+          <div class="match-card">
+            <span class="match-date">04/18/2026</span>
+            <div class="match-teams"><span class="team-name">NOTHING</span><span class="match-result"><span class="res-d">x</span> – <span class="res-v">x</span></span><span class="team-name">NOTHING</span></div>
+            <span class="match-badge badge-gold">🥇 Gold League</span>
+          </div>
+          <div class="match-card">
+            <span class="match-date">04/14/2026</span>
+            <div class="match-teams"><span class="team-name">NOTHING</span><span class="match-result"><span class="res-v">x</span> – <span class="res-d">x</span></span><span class="team-name">NOTHING</span></div>
+            <span class="match-badge badge-gold">🥇 Gold League</span>
+          </div>
+          <div class="match-card">
+            <span class="match-date">04/10/2026</span>
+            <div class="match-teams"><span class="team-name">NOTHING</span><span class="match-result"><span class="res-d">x</span> – <span class="res-v">x</span></span><span class="team-name">NOTHING</span></div>
+            <span class="match-badge badge-silver">🥈 Silver League</span>
+          </div>
+          <div class="match-card">
+            <span class="match-date">04/07/2026</span>
+            <div class="match-teams"><span class="team-name">NOTHING</span><span class="match-result"><span class="res-d">x</span> – <span class="res-v">x</span></span><span class="team-name">NOTHING</span></div>
+            <span class="match-badge badge-gold">🥇 Gold League</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEAGUES -->
+    <div class="section-box">
+      <div class="section-header">🏆 The Leagues</div>
+      <div class="section-body">
+        <div class="ligues-grid">
+          <div class="ligue-box ligue-gold">
+            <div class="ligue-header">🥇 Gold League</div>
+            <div class="ligue-rows">
+              <div class="ligue-row"><span class="ligue-row-rank">1</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">2</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">3</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">4</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">5</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+            </div>
+          </div>
+          <div class="ligue-box ligue-silver">
+            <div class="ligue-header">🥈 Silver League</div>
+            <div class="ligue-rows">
+              <div class="ligue-row"><span class="ligue-row-rank">1</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">2</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">3</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">4</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pts</span></div>
+              <div class="ligue-row"><span class="ligue-row-rank">5</span><span class="ligue-row-name">NOTHING</span><span class="ligue-row-pts">0 pt</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px; display:flex; align-items:center; gap:10px; background:#fff8d0; border:2px solid #e0c040; border-radius:10px; padding:10px 14px; font-size:15px; color:#6a5000;">
+          ⏳ <strong>Season end:</strong>&nbsp; 05/01/2026 — Rewards and promotions will be granted on this date.
+        </div>
+        <div style="margin-top:10px; font-size:14px; color:#7a5030; line-height:1.7;">
+          📌 The top 2 factions in Silver League are promoted to Gold League at the end of the month.<br>
+          The bottom 2 factions in Gold League are relegated to Silver League.
+        </div>
+      </div>
+    </div>
+
+    <!-- RECRUITMENT -->
+    <div class="section-box">
+      <div class="section-header">📩 Join a League</div>
+      <div class="section-body recruit-body">
+        <div class="recruit-text">
+          🎮 Want to enter your faction in the official wars?<br><br>
+          To join the <strong>Gold League</strong> or the <strong>Silver League</strong>, send a <strong>faction recruitment request</strong> on our Discord.<br><br>
+          An admin will review your request and place you in the league matching your faction's level.
+        </div>
+        <a href="https://discord.gg/" class="recruit-btn">💬 Apply on Discord</a>
+        <div style="font-size:13px;color:#9a7050;">⚠️ Replace the link with your real Discord invite link</div>
+      </div>
+    </div>
+
+    <!-- REWARDS -->
+    <div class="section-box full-width">
+      <div class="section-header">🎁 End of Month Rewards</div>
+      <div class="section-body">
+        <div style="font-size:16px;color:#7a5030;margin-bottom:14px;">
+          📅 Rewards distributed on the <strong>1st and 2nd of each month</strong> based on league results.
+        </div>
+        <div class="rewards-grid">
+          <div class="reward-card">
+            <span class="reward-icon">🥇</span>
+            <div class="reward-info">
+              <div class="reward-title">1st — Gold League</div>
+              <div class="reward-desc">Best faction in Gold League over the full month</div>
+            </div>
+            <span class="reward-value">Lancaster</span>
+          </div>
+          <div class="reward-card">
+            <span class="reward-icon">🥈</span>
+            <div class="reward-info">
+              <div class="reward-title">2nd — Gold League</div>
+              <div class="reward-desc">Second place in Gold League at the end of the month</div>
+            </div>
+            <span class="reward-value">Kukri</span>
+          </div>
+          <div class="reward-card">
+            <span class="reward-icon">🎖️</span>
+            <div class="reward-info">
+              <div class="reward-title">1st — Silver League</div>
+              <div class="reward-desc">Best faction in Silver League — guaranteed promotion to Gold</div>
+            </div>
+            <span class="reward-value">Guycot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACTIONS TABLE -->
+    <div class="section-box full-width">
+      <div class="section-header">📊 Participating Factions</div>
+      <div class="section-body">
+        <div class="stats-table-wrap">
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Faction</th>
+                <th>Origin</th>
+                <th>Battles played</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Gold League seasons</th>
+                <th>Silver League seasons</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td><span class="td-gold">0x Gold</span></td><td>—</td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td><span class="td-gold">0x Gold</span></td><td>—</td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td><span class="td-gold">0x Gold</span></td><td>—</td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td><span class="td-gold">0x Gold</span></td><td>—</td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td><span class="td-gold">0x Gold</span></td><td>—</td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td>—</td><td><span class="td-silver">0x Silver</span></td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td>—</td><td><span class="td-silver">0x Silver</span></td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td>—</td><td><span class="td-silver">0x Silver</span></td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td>—</td><td><span class="td-silver">0x Silver</span></td></tr>
+              <tr><td>NOTHING</td><td>none</td><td>0</td><td class="td-v">0</td><td class="td-d">0</td><td>—</td><td><span class="td-silver">0x Silver</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footers">By Jocker_ty</div>
+    <div class="youtube"><a href="https://www.youtube.com/@Jocker_ty"><img src="youtube.png" alt="YouTube"></a></div>
+  </footer>
+</body>
+</html>
